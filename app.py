@@ -4,9 +4,16 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
-def SayHello():
-    return f"{os.environ.get('MSG')}"
+def say_hello():
+    return os.environ.get('MSG', 'Hello World!')
 
-if __name__ == '__main___':
-    app.run(debug=True, port=5000, host='0.0.0.0')
+@app.route('/health')
+def health():
+    return {'status': 'healthy'}, 200
 
+if __name__ == '__main__':
+    app.run(
+        debug=os.environ.get('FLASK_DEBUG') == '1',
+        port=int(os.environ.get('PORT', '5000')),
+        host='0.0.0.0',
+    )
