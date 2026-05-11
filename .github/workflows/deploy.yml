@@ -79,7 +79,7 @@ jobs:
           aws ssm send-command \
             --instance-ids "$INSTANCE_ID" \
             --document-name "AWS-RunShellScript" \
-            --comment "Deploy ${IMAGE_URI}" \
+            --comment "Deploy ${APP_NAME}" \
             --parameters "commands=$COMMANDS" \
             --region "$AWS_REGION" \
             --output text
